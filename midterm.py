@@ -50,23 +50,25 @@ def __main__():
     
 
     while True:
+        count += 1
         svmSGD_scaled = SGDClassifier(loss="hinge", tol = 0.0001, max_iter=10**8).fit(x_train_scaled, y_train)
         if accuracy(y_dev, svmSGD_scaled.predict(x_dev_scaled)) > 0.69:
             break
 
     print("SGD svm scaled result scaled: ", accuracy(y_dev, svmSGD_scaled.predict(x_dev_scaled)))
+    
 
     y_prediction = svmSGD_scaled.predict(x_test_scaled)
 
-    f = open("test", "w")
+    f = open("SeanBritt_test_result.txt", "w")
 
     for i in range(0, len(y_prediction)):
-        string = str(i) + ", " + str(y_prediction[i]) +"\n"
+        string = str(i) + "\t" + str(y_prediction[i]) +"\n"
         f.write(string)
 
     f.close()
     
-    f=open("test", "r")
+    f=open("SeanBritt_test_result.txt", "r")
     f.readlines()
 
     f.close()
